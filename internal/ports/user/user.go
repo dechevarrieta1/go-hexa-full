@@ -1,4 +1,4 @@
-package UserPort
+package userport
 
 import UserModels "go-hexa-full/internal/core/user/models"
 

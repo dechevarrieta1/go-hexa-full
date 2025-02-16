@@ -1,7 +1,7 @@
-package UserModels
+package usermodels
 
 type User struct {
-	Name     string
-	LastName string
-	ID       string
+	Name     string `json:"name" bson:"name"`
+	Email    string `json:"email" bson:"email"`
+	Password string `json:"id" bson:"password"`
 }

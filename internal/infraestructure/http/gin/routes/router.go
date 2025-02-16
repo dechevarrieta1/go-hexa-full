@@ -1,33 +1,17 @@
-package GinRoutes
+package ginroutes
 
 import (
-	GinMiddlewares "go-hexa-full/internal/infraestructure/http/gin/middlewares"
-	GinModels "go-hexa-full/internal/infraestructure/http/gin/models"
-	"log"
+	ginRoutesModels "go-hexa-full/internal/infraestructure/http/gin/models"
 
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRouter(routes []GinModels.Route) *gin.Engine {
+func SetupRouter(routeModules ...ginRoutesModels.RouteInterface) *gin.Engine {
 	r := gin.Default()
 
-	// Middlewares
-	r.Use(GinMiddlewares.LoggerMiddleware())
-
-	// Rutas
-	for _, route := range routes {
-		switch route.Method {
-		case "GET":
-			r.GET(route.Path, route.Handler)
-		case "POST":
-			r.POST(route.Path, route.Handler)
-		case "PUT":
-			r.PUT(route.Path, route.Handler)
-		case "DELETE":
-			r.DELETE(route.Path, route.Handler)
-		default:
-			log.Println("[LOG][INFO] Invalid HTTP method") //todo -> check the possibility of not log this bc a possible DDOS attack can print a lot this line....
-		}
+	for _, module := range routeModules {
+		module.RegisterRoutes(r)
 	}
+
 	return r
 }

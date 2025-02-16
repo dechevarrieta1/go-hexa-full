@@ -1,4 +1,4 @@
-package GinMiddlewares
+package ginmiddlewares
 
 import (
 	"fmt"

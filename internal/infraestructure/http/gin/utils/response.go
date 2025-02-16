@@ -1,4 +1,4 @@
-package GinUserService
+package ginutils
 
 import (
 	"encoding/json"
